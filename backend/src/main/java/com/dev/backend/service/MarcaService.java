@@ -5,30 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dev.backend.entity.Categoria;
-import com.dev.backend.repository.CategoriaRepository;
+import com.dev.backend.entity.Marca;
+import com.dev.backend.repository.MarcaRepository;
 
 
 @Service
 public class MarcaService {
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private MarcaRepository marcaRepository;
 
-    public List<Categoria> buscarTodos() {
-        return categoriaRepository.findAll();
+    public List<Marca> buscarTodos() {
+        return marcaRepository.findAll();
     }
 
-    public Categoria inserir(Categoria categoria) {
-        Categoria categoriaNovo = categoriaRepository.saveAndFlush(categoria);
-        return categoriaNovo;
+    public Marca inserir(Marca marca) {
+        Marca marcaNovo = marcaRepository.saveAndFlush(marca);
+        return marcaNovo;
     }
 
-    public Categoria alterar(Categoria categoria) {
-        return categoriaRepository.saveAndFlush(categoria);
+    public Marca alterar(Marca marca) {
+        return marcaRepository.saveAndFlush(marca);
     }
 
     public void excluir(Long id) {
-        Categoria categoria = categoriaRepository.findById(id).get();
-        categoriaRepository.delete(categoria);
+        Marca marca = marcaRepository.findById(id).get();
+        marcaRepository.delete(marca);
     }
 }
