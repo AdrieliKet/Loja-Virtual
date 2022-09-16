@@ -1,21 +1,16 @@
 package com.dev.backend.entity;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="pessoa")
+@Table(name = "pessoa")
 @Data
 public class Pessoa {
 
@@ -33,9 +28,19 @@ public class Pessoa {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
     private String excluir_logico;
-    
+
     @ManyToOne
-    @JoinColumn(name="idCidade")
+    @JoinColumn(name = "idCidade")
     private Cidade cidade;
+
+    @OneToMany(mappedBy = "pessoa", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Setter(AccessLevel.NONE)
+    private List<PermissaoPessoa> permissaoPessoas;
+
+    public void setPermissaoPessoas(List<PermissaoPessoa> permissaoPessoaList) {
+        for (PermissaoPessoa pessoa : permissaoPessoaList) {
+            pessoa.setPessoa(this);
+        }
+    }
 
 }
