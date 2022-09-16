@@ -32,6 +32,8 @@ public class ProdutoImagens {
     @ManyToOne
     @JoinColumn(name="idProduto")
     private Produto produto;
-    
 
+    @ManyToOne
+    @JoinColumn(name="idProdutoImagens")
+    private ProdutoImagens produtoImagens;
 }
