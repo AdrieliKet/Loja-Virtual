@@ -19,6 +19,9 @@ public class PessoaClienteService {
     @Autowired
     private PermissaoPessoaService permissaoPessoaService;
 
+    @Autowired
+    private  EmailService emailService;
+
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
@@ -35,6 +38,7 @@ public class PessoaClienteService {
         }
         Pessoa pessoaNovo = pessoaClienteRepository.saveAndFlush(pessoa);
         permissaoPessoaService.vincularPessoaPermissaoCliente(pessoaNovo);
+        emailService.enviarEmailtexto(pessoaNovo.getEmail(), "cadastro na Loja", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por e-mail!");
         return pessoaNovo;
     }
 
