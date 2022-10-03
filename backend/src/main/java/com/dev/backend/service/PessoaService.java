@@ -29,7 +29,7 @@ public class PessoaService {
 	public Pessoa inserir(Pessoa pessoa) {
 		if (!StringUtils.isEmpty(pessoa.getNome()) && validarCPF(pessoa.getCpf())) {
 			Matcher matcher = pattern.matcher(pessoa.getEmail());
-			if (matcher.matches() == false)
+			if (!matcher.matches())
 				pessoa.setEmail("");
 //			pessoa.setImagemPerfil(Base64.getEncoder().encode(pessoa.getImagemPerfil()));;
 			pessoa.setSenha(new BCryptPasswordEncoder().encode(pessoa.getSenha()));
@@ -42,7 +42,7 @@ public class PessoaService {
 	public Pessoa alterar(Pessoa pessoa) {
 		if (!StringUtils.isEmpty(pessoa.getNome()) && validarCPF(pessoa.getCpf())) {
 			Matcher matcher = pattern.matcher(pessoa.getEmail());
-			if (matcher.matches() == false)
+			if (!matcher.matches())
 				pessoa.setEmail("");
 //			pessoa.setImagemPerfil(Base64.getEncoder().encode(pessoa.getImagemPerfil()));;
 			pessoa.setSenha(new BCryptPasswordEncoder().encode(pessoa.getSenha()));
