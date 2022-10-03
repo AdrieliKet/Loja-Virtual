@@ -6,5 +6,5 @@ import com.dev.backend.entity.Cidade;
 import com.dev.backend.entity.Pessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
-    
+    Pessoa findByEmail(String email);
 }
