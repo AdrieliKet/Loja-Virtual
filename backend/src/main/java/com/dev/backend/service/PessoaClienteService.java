@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +22,7 @@ public class PessoaClienteService {
     private PermissaoPessoaService permissaoPessoaService;
 
     @Autowired
-    private  EmailService emailService;
+    private EmailService emailService;
 
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -38,7 +40,11 @@ public class PessoaClienteService {
         }
         Pessoa pessoaNovo = pessoaClienteRepository.saveAndFlush(pessoa);
         permissaoPessoaService.vincularPessoaPermissaoCliente(pessoaNovo);
-        emailService.enviarEmailtexto(pessoaNovo.getEmail(), "cadastro na Loja", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por e-mail!");
+        //emailService.enviarEmailTexto(pessoaNovo.getEmail(), "cadastro na Loja", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por e-mail!");
+        Map<String, Object> propriedades = new HashMap<>();
+        propriedades.put("nome", pessoaNovo.getNome());
+        propriedades.put("mensagem", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por e-mail!");
+        emailService.enviarEmailTemplate(pessoaNovo.getEmail(),"Cadastro na Loja", propriedades);
         return pessoaNovo;
     }
 

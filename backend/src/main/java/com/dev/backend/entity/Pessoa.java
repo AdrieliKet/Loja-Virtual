@@ -1,6 +1,5 @@
 package com.dev.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -32,11 +31,11 @@ public class Pessoa {
     private Date dataAtualizacao;
     private String excluir_logico;
 
-    @ManyToOne
-    @JoinColumn(name = "idCidade")
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "idCidade" )
     private Cidade cidade;
 
-    @OneToMany(mappedBy = "pessoa", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(AccessLevel.NONE)
     private List<PermissaoPessoa> permissaoPessoas;
 
@@ -44,6 +43,7 @@ public class Pessoa {
         for (PermissaoPessoa pessoa : permissaoPessoaList) {
             pessoa.setPessoa(this);
         }
-    }
+        this.permissaoPessoas =  permissaoPessoaList;
+        }
 
 }

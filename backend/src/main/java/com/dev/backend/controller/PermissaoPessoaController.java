@@ -44,4 +44,5 @@ public class PermissaoPessoaController {
         permissaoPessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
+
 }
