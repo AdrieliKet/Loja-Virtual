@@ -31,6 +31,7 @@ import IconsDemo from './components/IconsDemo';
 
 import Crud from './pages/Crud';
 import Estado from './pages/cadastros/Estado';
+import Cidade from './pages/cadastros/Cidade';
 import EmptyPage from './pages/EmptyPage';
 import TimelineDemo from './pages/TimelineDemo';
 
@@ -201,7 +202,8 @@ const App = () => {
             label: 'Pages', icon: 'pi pi-fw pi-clone',
             items: [
                 { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: '/crud' },
-                { label: 'Estado', icon: 'pi pi-fw pi-state-edit', to: '/estado' },
+                { label: 'Estado', icon: 'pi pi-fw pi-map-marker', to: '/estado' },
+                { label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidade' },
                 { label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline' },
                 { label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty' }
             ]
@@ -320,6 +322,7 @@ const App = () => {
                     <Route path="/timeline" component={TimelineDemo} />
                     <Route path="/crud" component={Crud} />
                     <Route path="/estado" component={Estado} />
+                    <Route path="/cidade" component={Cidade} />
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/documentation" component={Documentation} />
                 </div>

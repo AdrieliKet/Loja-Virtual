@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export class EstadoService {
-    url = process.env.REACT_APP_URI_API;
+    url = process.env.REACT_APP_URL_API;
 
     estados(){
         return Axios.get(this.url+"/estado/");

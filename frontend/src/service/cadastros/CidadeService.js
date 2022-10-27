@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export class CidadeService {
-    url = process.env.REACT_APP_URI_API;
+    url = process.env.REACT_APP_URL_API;
 
     cidades(){
         return Axios.get(this.url+"/cidade/");
