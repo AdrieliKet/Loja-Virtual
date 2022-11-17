@@ -1,7 +1,6 @@
 package com.dev.backend.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -9,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
-@Table(name="cidade")
+@Table(name="permissao_pessoa")
 @Data
 public class PermissaoPessoa {
 

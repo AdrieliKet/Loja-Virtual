@@ -30,4 +30,24 @@ public class PermissaoPessoaService {
             permissaoPessoaRepository.save(permissaoPessoa);
         }
     }
+    
+    public List<PermissaoPessoa> buscarTodos(){
+        return permissaoPessoaRepository.findAll();
+    }
+
+    public PermissaoPessoa inserir(PermissaoPessoa permissaoPessoa){
+        permissaoPessoa.setDataCriacao(new Date());
+        PermissaoPessoa permissaoPessoaNovo = permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
+        return permissaoPessoaNovo;
+    }
+    
+    public PermissaoPessoa alterar(PermissaoPessoa permissaoPessoa) {
+        permissaoPessoa.setDataAtualizacao(new Date());
+        return permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
+    }
+    
+    public void excluir(Long id) {
+        PermissaoPessoa permissaoPessoa = permissaoPessoaRepository.findById(id).get();
+        permissaoPessoaRepository.delete(permissaoPessoa);
+    }
 }
