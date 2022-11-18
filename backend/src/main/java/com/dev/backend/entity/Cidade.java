@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name="cidade")
@@ -31,6 +33,7 @@ public class Cidade {
     
     @ManyToOne
     @JoinColumn(name="idEstado")
+    @NotFound(action = NotFoundAction.IGNORE)
     private Estado estado;
     
 

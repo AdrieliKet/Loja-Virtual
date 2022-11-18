@@ -3,6 +3,8 @@ package com.dev.backend.entity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,8 +33,9 @@ public class Pessoa {
     private Date dataAtualizacao;
     private String excluir_logico;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne (cascade = CascadeType.MERGE)
     @JoinColumn(name = "idCidade" )
+    @NotFound(action = NotFoundAction.IGNORE)
     private Cidade cidade;
 
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})

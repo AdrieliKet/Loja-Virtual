@@ -32,6 +32,9 @@ import IconsDemo from './components/IconsDemo';
 import Crud from './pages/Crud';
 import Estado from './pages/cadastros/Estado';
 import Cidade from './pages/cadastros/Cidade';
+import Pessoa from './pages/cadastros/Pessoa';
+import Marca from './pages/cadastros/Marca';
+import Categoria from './pages/cadastros/Categoria';
 import EmptyPage from './pages/EmptyPage';
 import TimelineDemo from './pages/TimelineDemo';
 
@@ -158,6 +161,17 @@ const App = () => {
     }
 
     const menu = [
+            {
+                label: 'Pages', icon: 'pi pi-fw pi-clone',
+                items: [
+                    { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: '/crud' },
+                    { label: 'Estado', icon: 'pi pi-fw pi-map-marker', to: '/estado' },
+                    { label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidade' },
+                    { label: 'Pessoa', icon: 'pi pi-fw pi-user', to: '/pessoa' },
+                    { label: 'Marca', icon: 'pi pi-fw pi-apple', to: '/marca' },
+                    { label: 'Categoria', icon: 'pi pi-fw pi-star-fill', to: '/categoria' },
+                ]
+            },
         {
             label: 'Home',
             items: [{
@@ -196,16 +210,6 @@ const App = () => {
             label: 'Icons',
             items: [
                 { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: '/icons' }
-            ]
-        },
-        {
-            label: 'Pages', icon: 'pi pi-fw pi-clone',
-            items: [
-                { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: '/crud' },
-                { label: 'Estado', icon: 'pi pi-fw pi-map-marker', to: '/estado' },
-                { label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidade' },
-                { label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline' },
-                { label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty' }
             ]
         },
         {
@@ -323,6 +327,9 @@ const App = () => {
                     <Route path="/crud" component={Crud} />
                     <Route path="/estado" component={Estado} />
                     <Route path="/cidade" component={Cidade} />
+                    <Route path="/pessoa" component={Pessoa} />
+                    <Route path="/marca" component={Marca} />
+                    <Route path="/categoria" component={Categoria} />
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/documentation" component={Documentation} />
                 </div>

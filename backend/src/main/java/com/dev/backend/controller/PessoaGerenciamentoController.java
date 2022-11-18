@@ -19,6 +19,7 @@ public class PessoaGerenciamentoController {
     private PessoaGerenciamentoService pessoaGerenciamentoService;
 
     @PostMapping("/senha-codigo")
+    @CrossOrigin("http://localhost:3000")
     public String recuperarCodigo(@RequestBody Pessoa pessoa) {
     	try {
     		 return pessoaGerenciamentoService.solicitarCodigo(pessoa.getEmail());
@@ -29,6 +30,7 @@ public class PessoaGerenciamentoController {
     }
     
     @PostMapping("/senha-alterar")
+    @CrossOrigin("http://localhost:3000")
     public String alterarSenha(@RequestBody Pessoa pessoa ) {
         return pessoaGerenciamentoService.alterarSenha(pessoa);
     }

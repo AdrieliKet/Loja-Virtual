@@ -1,9 +1,9 @@
 import Axios from "axios";
 
-export class EstadoService {
-    url = "http://localhost:8080/api/estado/";
+export class PessoaService {
+    url = "http://localhost:8080/api/pessoa/";
 
-    estados(){
+    pessoas(){
         return Axios.get(this.url);
     }
 
