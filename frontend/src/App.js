@@ -32,6 +32,7 @@ import IconsDemo from './components/IconsDemo';
 import Crud from './pages/Crud';
 import Estado from './pages/cadastros/Estado';
 import Cidade from './pages/cadastros/Cidade';
+import Produto from "./pages/cadastros/Produto";
 import Pessoa from './pages/cadastros/Pessoa';
 import Marca from './pages/cadastros/Marca';
 import Categoria from './pages/cadastros/Categoria';
@@ -167,6 +168,7 @@ const App = () => {
                     { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: '/crud' },
                     { label: 'Estado', icon: 'pi pi-fw pi-map-marker', to: '/estado' },
                     { label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidade' },
+                    { label: 'Produto', icon: 'pi pi-fw pi-briefcase', to: '/produto' },
                     { label: 'Pessoa', icon: 'pi pi-fw pi-user', to: '/pessoa' },
                     { label: 'Marca', icon: 'pi pi-fw pi-apple', to: '/marca' },
                     { label: 'Categoria', icon: 'pi pi-fw pi-star-fill', to: '/categoria' },
@@ -327,6 +329,7 @@ const App = () => {
                     <Route path="/crud" component={Crud} />
                     <Route path="/estado" component={Estado} />
                     <Route path="/cidade" component={Cidade} />
+                    <Route path="/produto" component={Produto} />
                     <Route path="/pessoa" component={Pessoa} />
                     <Route path="/marca" component={Marca} />
                     <Route path="/categoria" component={Categoria} />

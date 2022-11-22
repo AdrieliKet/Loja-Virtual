@@ -149,7 +149,7 @@ const Categoria = () => {
             <h5 className='m-0'>Categorias Cadastradas</h5>
             <span className='block mt-2 md:mt-0 p-input-icon-left'>
                 <i className='pi pi-search'/>
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Pesquisar..."/>
             </span>
         </div>
     )
@@ -177,7 +177,7 @@ const Categoria = () => {
                     <DataTable ref={dt} value={objetos} dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]} className="datatable-responsive"
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                        globalFilter={globalFilter} emptyMessage="No products found." header={header} responsiveLayout="scroll">
+                        globalFilter={globalFilter} emptyMessage="Sem objetos cadastradas" header={header} responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                         <Column field="id" header="id" sortable body={idBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column field="nome" header="Nome" sortable body={nomeBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
@@ -185,7 +185,7 @@ const Categoria = () => {
 
                     </DataTable>
 
-                    <Dialog visible={objetoDialog} style={{ width: '450px' }} footer={objetoDialogFooter} header="Product Details" modal className="p-fluid" onHide={hideDialog}>
+                    <Dialog visible={objetoDialog} style={{ width: '450px' }} footer={objetoDialogFooter} header="Cadastro de Categorias" modal className="p-fluid" onHide={hideDialog}>
                         <div className="field">
                             <label htmlFor="nome">Nome</label>
                             <InputText id="name" value={objeto.nome} onChange={(e) => onInputChange(e, 'nome')} required autoFocus className={classNames({ 'p-invalid': submitted && !objeto.nome })} />
