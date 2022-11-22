@@ -16,8 +16,11 @@ import {Dropdown, DropDown} from 'primereact/dropdown';
 import { CidadeService } from '../../service/cadastros/CidadeService';
 import { PessoaService } from '../../service/cadastros/PessoaService';
 import { InputMask } from 'primereact/inputmask';
+import { PermissaoService} from "../../service/cadastros/PermissaoService";
+import { MultiSelect } from 'primereact/multiselect';
 
 import Axios from 'axios';
+import { Formik, useFormik } from 'formik';
 
 const Pessoa = () => {
 
@@ -28,6 +31,7 @@ const Pessoa = () => {
         endereco: '',
         cep: '',
         cidade: '',
+        permissaoPessoas: []
     };
 
     const [objetos, setObjetos] = useState(null);
@@ -37,22 +41,32 @@ const Pessoa = () => {
     const [objetoDeleteDialog, setObjetoDeleteDialog] = useState(false);
     const [atualizar, setAtualizar] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    const [permissoes, setPermissoes] = useState(null);
 
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
     const objetoService = new PessoaService();
     const cidadeService = new CidadeService();
+    const permissaoService = new PermissaoService();
 
     useEffect(() => {
         cidadeService.cidades().then(res =>{
             setCidades(res.data);
-        })
+        });
+
+        permissaoService.listarTodos().then((res =>{
+            let permissoesTemporarias = [];
+            res.data.forEach(element =>{
+                permissoesTemporarias.push({permissao:element});
+            });
+            setPermissoes(permissoesTemporarias);
+        }))
     }, []);
 
     useEffect(() => {
         if(objetos == null){
-            objetoService.pessoas().then(res =>{
+            objetoService.listarTodos().then(res =>{
                 setObjetos(res.data);
             })
         }
@@ -63,6 +77,28 @@ const Pessoa = () => {
             setObjetos(result.data);
         });
     }
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: objeto,
+        validate: (data)=>{
+            let errors = [];
+
+            if(!data.nome){
+                errors.nome = 'Nome é obrigatório';
+            }
+
+
+            if(!data.email){
+                errors.nome = 'Email é obrigatório';
+            }
+            return errors;
+        },
+        onSubmit: (data)=>{
+            saveObjeto();
+            formik.resetForm();
+        }
+    })
 
     const openNew = () => {
         setObjeto(objetoNovo);
@@ -83,7 +119,7 @@ const Pessoa = () => {
         setSubmitted(true);
 
         if(objeto.nome.trim()){
-            let _objeto = {...objeto};
+            let _objeto = formik.values;
             if(objeto.id){
                 objetoService.alterar(_objeto).then(data => {
                     toast.current.show({severity: 'success', summary: 'Sucesso', detail: "Alterado"});
@@ -236,8 +272,13 @@ const Pessoa = () => {
                             {submitted && !objeto.cep && <small className="p-invalid">CEP é requerido</small>}
                         </div>
                         <div className="field">
-                            <label htmlFor="estado">Cidade</label>
+                            <label htmlFor="cidade">Cidade</label>
                             <Dropdown optionLabel="nome" value={objeto.cidade} options={cidades} filter onChange={(e) => onInputChange(e, 'cidade')} placeholder="Selecione uma cidade"/>
+                        </div>
+
+                        <div className="field">
+                            <label htmlFor="permissaoPessoas">Permissões</label>
+                            <MultiSelect id="permissaoPessoas" dataKey='permissao.id' value={Formik.values.permissaoPessoas} options={permissoes} onChange={Formik.handleChange} optionLabel="permissao.nome" placeholder='Selecione as Permissões' />
                         </div>
                     </Dialog>
 
