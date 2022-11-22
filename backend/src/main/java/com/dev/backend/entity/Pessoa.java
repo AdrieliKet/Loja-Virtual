@@ -1,9 +1,10 @@
 package com.dev.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +22,9 @@ public class Pessoa {
     private String cpf;
     private String email;
     private String senha;
+    private String codigoRecuperacaoSenha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataEnvioCodigo;
     private String endereco;
     private String cep;
     @Temporal(TemporalType.TIMESTAMP)
@@ -29,11 +33,12 @@ public class Pessoa {
     private Date dataAtualizacao;
     private String excluir_logico;
 
-    @ManyToOne
-    @JoinColumn(name = "idCidade")
+    @ManyToOne (cascade = CascadeType.MERGE)
+    @JoinColumn(name = "idCidade" )
+    @NotFound(action = NotFoundAction.IGNORE)
     private Cidade cidade;
 
-    @OneToMany(mappedBy = "pessoa", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @Setter(AccessLevel.NONE)
     private List<PermissaoPessoa> permissaoPessoas;
 
@@ -41,6 +46,7 @@ public class Pessoa {
         for (PermissaoPessoa pessoa : permissaoPessoaList) {
             pessoa.setPessoa(this);
         }
-    }
+        this.permissaoPessoas =  permissaoPessoaList;
+        }
 
 }
