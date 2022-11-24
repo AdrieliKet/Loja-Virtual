@@ -1,11 +1,11 @@
 {
-    "name": "sakai-react",
+    "name": "frontend",
     "version": "7.0.3-SNAPSHOT",
     "homepage": ".",
     "private": false,
     "repository": {
         "type": "git",
-        "url": "https://github.com/primefaces/sakai-react.git"
+        "url": "https://github.com/AdrieliKet/Loja-Virtual"
     },
     "license": "MIT",
     "dependencies": {
@@ -18,6 +18,7 @@
         "chart.js": "3.3.2",
         "classnames": "^2.2.6",
         "cors": "^2.8.5",
+        "formik": "^2.2.9",
         "primeflex": "3.1.0",
         "primeicons": "^5.0.0",
         "primereact": "7.2.0",

@@ -195,6 +195,15 @@ const Pessoa = () => {
         );
     }
 
+    const emailBodyTemplate = (rowData) => {
+            return (
+                <>
+                    <span className='p-column-title'>email</span>
+                    {rowData.email}
+                </>
+            );
+        }
+
     const cidadeBodyTemplate = (rowData) => {
         return (
             <>
@@ -241,7 +250,8 @@ const Pessoa = () => {
                         <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                         <Column field="id" header="id" sortable body={idBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column field="nome" header="Nome" sortable body={nomeBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
-                        <Column field="cidade" header="cidade" sortable body={cidadeBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
+                        <Column field="email" header="Email" sortable body={emailBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
+                        <Column field="cidade" header="Cidade" sortable body={cidadeBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column body={actionBodyTemplate}></Column>
                     </DataTable>
 
@@ -278,7 +288,7 @@ const Pessoa = () => {
 
                         <div className="field">
                             <label htmlFor="permissaoPessoas">Permissões</label>
-                            <MultiSelect id="permissaoPessoas" dataKey='permissao.id' value={Formik.values.permissaoPessoas} options={permissoes} onChange={Formik.handleChange} optionLabel="permissao.nome" placeholder='Selecione as Permissões' />
+                            <MultiSelect id="permissaoPessoas" dataKey='permissao.id' value={formik.values.permissaoPessoas} options={permissoes} onChange={formik.handleChange} optionLabel="permissao.nome" placeholder='Selecione as Permissões' />
                         </div>
                     </Dialog>
 
