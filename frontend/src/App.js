@@ -33,9 +33,11 @@ import Crud from './pages/Crud';
 import Estado from './pages/cadastros/Estado';
 import Cidade from './pages/cadastros/Cidade';
 import Produto from "./pages/cadastros/Produto";
+import ProdutoImagens from "./pages/cadastros/ProdutoImagens";
 import Pessoa from './pages/cadastros/Pessoa';
 import Marca from './pages/cadastros/Marca';
 import Categoria from './pages/cadastros/Categoria';
+import Permissao from './pages/cadastros/Permissao';
 import EmptyPage from './pages/EmptyPage';
 import TimelineDemo from './pages/TimelineDemo';
 
@@ -170,6 +172,7 @@ const App = () => {
                     { label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidade' },
                     { label: 'Produto', icon: 'pi pi-fw pi-briefcase', to: '/produto' },
                     { label: 'Pessoa', icon: 'pi pi-fw pi-user', to: '/pessoa' },
+                    { label: 'Permissao', icon: 'pi pi-fw pi-ban', to: '/permissao' },
                     { label: 'Marca', icon: 'pi pi-fw pi-apple', to: '/marca' },
                     { label: 'Categoria', icon: 'pi pi-fw pi-star-fill', to: '/categoria' },
                 ]
@@ -330,7 +333,9 @@ const App = () => {
                     <Route path="/estado" component={Estado} />
                     <Route path="/cidade" component={Cidade} />
                     <Route path="/produto" component={Produto} />
+                    <Route path="/produtoImagens/:id" component={ProdutoImagens} />
                     <Route path="/pessoa" component={Pessoa} />
+                    <Route path="/permissao" component={Permissao} />
                     <Route path="/marca" component={Marca} />
                     <Route path="/categoria" component={Categoria} />
                     <Route path="/empty" component={EmptyPage} />
