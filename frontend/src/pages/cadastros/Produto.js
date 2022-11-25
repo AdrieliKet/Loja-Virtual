@@ -82,7 +82,6 @@ const Produto = () => {
 
     const saveObjeto = () => {
         setSubmitted(true);
-        console.log(objeto);
 
         if (objeto.descricao.trim()) {
             let _objeto = { ...objeto };
@@ -126,7 +125,6 @@ const Produto = () => {
     }
 
     const onInputChange = (e, name) => {
-        console.log(e.target.value);
         const val = (e.target && e.target.value) || '';
         let _objeto = { ...objeto };
         _objeto[`${name}`] = val;
@@ -227,7 +225,7 @@ const Produto = () => {
                     <DataTable ref={dt} value={objetos}
                                dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]} className="datatable-responsive"
                                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                               currentPageReportTemplate="Mostrando {first} de {last}. Total de {totalRecords}"
+                               currentPageReportTemplate="Mostrando {first} de {last}. Total de {totalRecords} produtos"
                                globalFilter={globalFilter} emptyMessage="Sem produtos cadastrados." header={header} responsiveLayout="scroll">
                         <Column field="id" header="ID" sortable body={idBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column field="descricao" header="Descrição Curta" sortable body={descricaoBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>

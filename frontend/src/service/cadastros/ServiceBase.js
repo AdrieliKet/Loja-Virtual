@@ -7,9 +7,14 @@ export class ServiceBase {
     constructor(urlBase) {
         this.url = "http://localhost:8080/api/"+urlBase+"/";
     }
+
     listarTodos(){
         return Axios.get(this.url);
     }
+
+    buscarId(id){
+            return Axios.get(this.url+id);
+        }
 
     inserir(objeto){
         return Axios.post(this.url, objeto);
