@@ -1,13 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Toast} from 'primereact/toast';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
+import { FileUpload } from 'primereact/fileupload';
+import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
-import {Button} from 'primereact/button';
-import {Dialog} from 'primereact/dialog';
-import {InputText} from 'primereact/inputtext';
-import {EstadoService} from '../../service/cadastros/EstadoService';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { RadioButton } from 'primereact/radiobutton';
+import { InputNumber } from 'primereact/inputnumber';
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { EstadoService } from '../../service/cadastros/EstadoService';
 import Axios from 'axios';
 
 const Estado = () => {
@@ -40,6 +45,15 @@ const Estado = () => {
         Axios.get("http://localhost:8080/api/estado/").then(result => {
             setObjetos(result.data);
         });
+    }
+
+    const actionBodyTemplate = (rowData) => {
+        return (
+            <div className="actions">
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editObjeto(rowData)} />
+                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning mt-2" onClick={() => confirmDeleteObjeto(rowData)} />
+            </div>
+        );
     }
 
     const openNew = () => {
@@ -93,7 +107,7 @@ const Estado = () => {
     }
 
     const onInputChange = (e, name) => {
-        const val = (e.target && e.targe.value) || '';
+        const val = (e.target && e.target.value) || '';
         let _objeto = {...objeto};
         _objeto[`${name}`] = val;
 
@@ -102,11 +116,11 @@ const Estado = () => {
 
     const leftToolbarTemplate = () => {
         return (
-            <React.Fragment>
-                <div className='my-2'>
-                    <Button label="Novo Estado" icon="pi pi-plus" className='p-button-success'/>
-                </div>
-            </React.Fragment>
+        <React.Fragment>
+            <div className='my-2'>
+                <Button label="Novo Estado" icon="pi pi-plus" className='p-button-success' onClick={openNew}/>
+            </div>
+        </React.Fragment>
         );
     }
 
@@ -134,15 +148,6 @@ const Estado = () => {
                 <span className='p-column-title'>sigla</span>
                 {rowData.sigla}
             </>
-        );
-    }
-
-    const actionBodyTemplate = (rowData) => {
-        return (
-            <div className="actions">
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editObjeto(rowData)} />
-                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning mt-2" onClick={() => confirmDeleteObjeto(rowData)} />
-            </div>
         );
     }
 
@@ -187,16 +192,16 @@ const Estado = () => {
                         <Column body={actionBodyTemplate}></Column>
                     </DataTable>
 
-                    <Dialog visible={objetoDialog} style={{width: '450px'}} header='Cadastro Estado'>
+                    <Dialog visible={objetoDialog} style={{ width: '450px' }} footer={objetoDialogFooter} header="Cadastrar/Editar" modal className="p-fluid" onHide={hideDialog}>
                         <div className="field">
                             <label htmlFor="nome">Nome</label>
-                            <InputText id="nome" value={objeto.nome} onChange={(e) => onInputChange(e, 'nome')} required autoFocus className={classNames({'p-invalid': submitted && !objeto.nome})}/>
-                            {submitted && !objeto.nome && <small className="p-invalid">Nome é requerido.</small>}
+                            <InputText id="nome" value={objeto.nome} onChange={(e) => onInputChange(e, 'nome')} required autoFocus className={classNames({ 'p-invalid': submitted && !objeto.nome })} />
+                            {submitted && !objeto.name && <small className="p-invalid">Nome é requerido.</small>}
                         </div>
                         <div className="field">
-                            <label htmlFor="sigla">Sigla</label>
-                            <InputText id="sigla" value={objeto.nome} onChange={(e) => onInputChange(e, 'sigla')} required autoFocus className={classNames({'p-invalid': submitted && !objeto.nome})}/>
-                            {submitted && !objeto.nome && <small className="p-invalid">Sigla é requerida.</small>}
+                            <label htmlFor="sigla">sigla</label>
+                            <InputText id="sigla" value={objeto.sigla} onChange={(e) => onInputChange(e, 'sigla')} required autoFocus className={classNames({ 'p-invalid': submitted && !objeto.sigla })} />
+                            {submitted && !objeto.sigla && <small className="p-invalid">Sigla é requerida.</small>}
                         </div>
                     </Dialog>
 

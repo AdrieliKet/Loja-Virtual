@@ -1,9 +1,9 @@
 import Axios from "axios";
 
-export class EstadoService {
-    url = "http://localhost:8080/api/estado/";
+export class CategoriaService {
+    url = "http://localhost:8080/api/categoria/";
 
-    estados(){
+    categorias(){
         return Axios.get(this.url);
     }
 
